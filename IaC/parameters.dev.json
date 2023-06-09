@@ -8,7 +8,7 @@
       "environmentType": {
         "value": "DEV"
       },
-      "additionalAppSettings": {
+      "additionalFunctionAppSettings": {
         "value": 
           { 
           "ASPNETCORE_ENVIRONMENT": "Development"

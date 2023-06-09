@@ -11,7 +11,7 @@
       "appServicePlanInstanceCount": {
         "value": 4
       },
-      "additionalAppSettings": {
+      "additionalFunctionAppSettings": {
         "value":
           { 
           "ASPNETCORE_ENVIRONMENT": "Production"

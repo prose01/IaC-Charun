@@ -8,7 +8,7 @@
       "environmentType": {
         "value": "TEST"
       },
-      "additionalAppSettings": {
+      "additionalFunctionAppSettings": {
         "value": 
           { 
           "ASPNETCORE_ENVIRONMENT": "Staging"

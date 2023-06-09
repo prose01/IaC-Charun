@@ -16,8 +16,8 @@ param environmentType string
 @description('App Service Plan Sku. Default is P1v2 or P2v2 for Production.')
 param appServicePlanSkuName string = (environmentType == 'PROD') ? 'P2v2' : 'P1v2'
 
-@description('Additional app settings for App Service.')
-param additionalAppSettings object = {}
+@description('Additional app settings for Function App Service.')
+param additionalFunctionAppSettings object = {}
 
 @description('Location. Default is northeurope.')
 param location string = 'northeurope'
@@ -39,7 +39,7 @@ resource newRG 'Microsoft.Resources/resourceGroups@2022-09-01' = {
 }
 
 // module deployed new appService Plan
-module appServicePlan 'br/modules:appserviceplan:2022-08-16' = {
+module appServicePlan 'br/modules:appserviceplan:2023-06-09' = {
   name: 'appServicePlan'
   scope: newRG
   params: {
@@ -52,16 +52,16 @@ module appServicePlan 'br/modules:appserviceplan:2022-08-16' = {
   }
 }
 
-// module deployed new appService
-module appService 'br/modules:appservice:2023-05-12' = {
-  name: 'appService'
+// module deployed new function Service
+module functionApp 'br/modules:functionapp:2023-06-09' = {
+  name: 'functionApp'
   scope: newRG
   params: {    
-    projectName: '${projectName}API'
+    projectName: projectName
     environmentType: environmentType
     appServicePlanID: appServicePlan.outputs.appServicePlanID
-    // virtualNetworkSubnetId: virtualNetworks.outputs.subnetId1
-    additionalAppSettings: additionalAppSettings
+    additionalFunctionAppSettings: additionalFunctionAppSettings
+    runtime: 'dotnet'
     location: location
     tags: tags
   }
